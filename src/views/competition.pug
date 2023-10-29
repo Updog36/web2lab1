@@ -1,0 +1,43 @@
+html
+    link(rel='stylesheet', type='text/css', href='/style.css')
+    head 
+        title WEB 2: #{matches[0].name}
+    body
+        h1 #{matches[0].name}
+        p Created by #{matches[0].organizername}
+        if sid == matches[0].organizer
+            form(action=`/competition/${matches[0].competition_id}`, method="post")
+                input(type="submit", name="delete", value="Delete")
+        br
+        h2 Leaderboard:
+        div 
+            table
+                tr
+                    th Player
+                    th Points
+                each player in leaderboard
+                    tr
+                        td #{player[0]}
+                        td #{player[1]}
+        br
+        h2 Matches:
+        div
+            each match in matches
+                p Round #{match.round_number} : #{match.player1} vs #{match.player2}
+                if match.score1 == null && sid == match.organizer
+                    form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
+                        input(type="submit", name="score", value="win")
+                        input(type="submit", name="score", value="draw")
+                        input(type="submit", name="score", value="loss")
+                if match.winner && match.score2
+                    if match.score1 > match.score2
+                        p #{match.player1} won
+                    else if match.score1 < match.score2
+                        p #{match.player2} won
+                    else
+                        p Draw
+                if match.score1 && sid == match.organizer
+                    form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
+                        input(type="submit", name="delete", value="Delete")
+        br        
+        a(href='/competitions', title='Back') Back

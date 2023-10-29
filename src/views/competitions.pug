@@ -1,0 +1,24 @@
+html
+    link(rel='stylesheet', type='text/css', href='style.css')
+    head 
+        title WEB 2: COMPETITIONS
+    body
+        h1 Competitions
+        // if user logged in, display the button to create a new competition
+        if username
+            a(href='/new-competition', title='New competition') New competition
+        
+        ul(class='competitions')
+            each compet in compets
+                li
+                    a(href='/competition/' + compet.competition_id, title=compet.name) #{compet.name}
+                    p By: #{compet.organizername}
+        
+        a(href='/') Home
+        if username
+            form(action="/logout", method="get")
+                input(type="submit", value="Logout " + username)
+        else
+            a(href='/sign-up', title='Sign up') Sign up
+
+        

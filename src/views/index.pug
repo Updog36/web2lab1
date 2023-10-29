@@ -1,0 +1,17 @@
+html 
+    link(rel='stylesheet', type='text/css', href='style.css')
+    head 
+        title WEB 2: ELECTRIC BOOGALOO
+    body
+        if username
+            h1 Welcome #{username}
+        ul 
+            li: a(href='/competitions', title='Competitions') Competitions
+            if username
+                li: a(href='/new-competition', title='New competition') New competition
+            if username
+                li: form(action="/logout", method="get")
+                    input(type="submit", value="Logout " + username)
+            else
+                li: a(href='/sign-up', title='Sign up') Sign up 
+        

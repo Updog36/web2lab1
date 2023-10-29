@@ -1,0 +1,23 @@
+html 
+    link(rel='stylesheet', type='text/css', href='style.css')
+    head 
+        title WEB 2: NEW COMPETITION
+    body
+        h1 New Competition
+        form(action="/new-competition", method="post")
+            label(for="name") Competition Name
+            input(type="text", name="name", id="name")
+            br
+            label(for="system") Point system ('x/y/z' where x, y and z are integers for win/draw/loss)
+            // have 3 input fields for the 3 numbers
+            input(type="text", name="win", id="win", size="1")
+            i /
+            input(type="text", name="draw", id="draw", size="1")
+            i /
+            input(type="text", name="loss", id="loss", size="1")
+            br
+            label(for="participants") Participants (separated by commas, 4 to 8)
+            input(type="text", name="participants", id="participants")
+            br
+            input(type="submit", value="Create")
+        a(href='/competitions', title='Back') Back
