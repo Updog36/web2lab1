@@ -30,7 +30,7 @@ html
                         button(type="submit", name="score", value="win") #{match.player1} won
                         button(type="submit", name="score", value="draw") Draw
                         button(type="submit", name="score", value="loss") #{match.player2} won
-                if match.winner && match.score2
+                if match.winner != null
                     if match.score1 > match.score2
                         p #{match.player1} won
                     else if match.score1 < match.score2
