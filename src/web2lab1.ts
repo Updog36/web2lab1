@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path'
 import https from 'https';
 import { auth, requiresAuth } from 'express-openid-connect'; 
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 dotenv.config()
 
 const app = express();
