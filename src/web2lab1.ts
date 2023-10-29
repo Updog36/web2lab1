@@ -98,9 +98,17 @@ app.post("/new-competition", requiresAuth(), function (req, res) {
   const participants = req.body.participants.split(",");
   // check validity of input
   if (!name || !win || !draw || !loss || !participants) {
-    alert("Please fill in all fields and try again");
-    return;
+    res.redirect("/new-competition");
   }
+
+  if (isNaN(win) || isNaN(draw) || isNaN(loss)) {
+    res.redirect("/new-competition");
+  }
+
+  if (win < 0 || draw < 0 || loss < 0) {
+    res.redirect("/new-competition");
+  }
+
 
   const system = win + "/" + draw + "/" + loss;
   
