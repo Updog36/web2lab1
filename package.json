@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && echo \"Build complete.\"",
     "start": "node web2lab1.js"
   },
   "dependencies": {
