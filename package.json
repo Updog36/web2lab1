@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "tsc && echo \"Build complete.\"",
-    "start": "node web2lab1.js"
+    "build": "tsc",
+    "start": "node .dist/web2lab1.js"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
