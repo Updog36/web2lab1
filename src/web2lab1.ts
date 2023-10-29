@@ -15,8 +15,7 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: 5432,
-  ssl: true
+  port: 5432
 });
 
 const port = 4080;
@@ -356,5 +355,5 @@ app.post("/competition/:id/:match", requiresAuth(), function (req, res) {
 
 // create server without key and cert
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`Lab1 app listening at port ${port}`)
  })
