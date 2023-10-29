@@ -109,13 +109,12 @@ app.post("/new-competition", requiresAuth(), function (req, res) {
     res.redirect("/new-competition");
   }
 
+  if (participants.length < 4 || participants.length > 8) {
+    res.redirect("/new-competition");
+  }
 
   const system = win + "/" + draw + "/" + loss;
   
-  if (participants.length < 4 || participants.length > 8) {
-    alert("Please enter between 4 and 8 participants");
-    return;
-  }
   // generate round robin rounds
   const participantsCopy : any[] = Array.from(participants);
   if (participants.length % 2 == 1) {
