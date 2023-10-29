@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "build": "npx tsc",
-    "start": "npx tsc && node web2lab1.js"
+    "build": "tsc",
+    "start": "npm run build && node web2lab1.js"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
