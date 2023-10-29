@@ -96,21 +96,11 @@ app.post("/new-competition", requiresAuth(), function (req, res) {
   const draw = req.body.draw;
   const loss = req.body.loss;
   const participants = req.body.participants.split(",");
+ 
   // check validity of input
-  if (!name || !win || !draw || !loss || !participants) {
+  if (!name || !win || !draw || !loss || !participants || isNaN(win) || isNaN(draw) || isNaN(loss) || win < 0 || draw < 0 || loss < 0 || participants.length < 4 || participants.length > 8) {
     res.redirect("/new-competition");
-  }
-
-  if (isNaN(win) || isNaN(draw) || isNaN(loss)) {
-    res.redirect("/new-competition");
-  }
-
-  if (win < 0 || draw < 0 || loss < 0) {
-    res.redirect("/new-competition");
-  }
-
-  if (participants.length < 4 || participants.length > 8) {
-    res.redirect("/new-competition");
+    return;
   }
 
   const system = win + "/" + draw + "/" + loss;
