@@ -5,7 +5,7 @@ html
     body
         h1 #{matches[0].name}
         p Created by #{matches[0].organizername}
-        if sid == matches[0].organizer
+        if sub == matches[0].organizer
             form(action=`/competition/${matches[0].competition_id}`, method="post")
                 input(type="submit", name="delete", value="Delete")
         br
@@ -24,7 +24,7 @@ html
         div
             each match in matches
                 p Round #{match.round_number} : #{match.player1} vs #{match.player2}
-                if match.score1 == null && sid == match.organizer
+                if match.score1 == null && sub == match.organizer
                     form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
                         input(type="submit", name="score", value="win")
                         input(type="submit", name="score", value="draw")
@@ -36,7 +36,7 @@ html
                         p #{match.player2} won
                     else
                         p Draw
-                if match.score1 && sid == match.organizer
+                if match.score1 && sub == match.organizer
                     form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
                         input(type="submit", name="delete", value="Delete")
         br        

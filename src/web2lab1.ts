@@ -59,10 +59,8 @@ app.get("/sign-up", (req, res) => {
 app.get("/competitions", function (req, res) {
   let username : string | undefined;
   let compets : any[] = [];
-  let sid : string | undefined;
   if (req.oidc.isAuthenticated()) {
     username = req.oidc.user?.name ?? req.oidc.user?.sub;
-    sid = req.oidc.user?.sid;
   }
 
   pool.query("SELECT * FROM competitions ORDER BY competition_id DESC",
@@ -79,7 +77,6 @@ app.get("/competitions", function (req, res) {
 
 app.get("/new-competition", requiresAuth(), function (req, res) {
   let username : string | undefined;
-  let sid : string | undefined;
   if (req.oidc.isAuthenticated()) {
     username = req.oidc.user?.name ?? req.oidc.user?.sub;
   }
@@ -89,10 +86,10 @@ app.get("/new-competition", requiresAuth(), function (req, res) {
 app.post("/new-competition", requiresAuth(), function (req, res) {
   let competitionId : number;
   let username : string | undefined;
-  let sid : string | undefined;
+  let sub : string | undefined;
   if (req.oidc.isAuthenticated()) {
     username = req.oidc.user?.name ?? req.oidc.user?.sub;
-    sid = req.oidc.user?.sid;
+    sub = req.oidc.user?.sub;
   }
   const name = req.body.name;
   const win = req.body.win;
@@ -128,7 +125,7 @@ app.post("/new-competition", requiresAuth(), function (req, res) {
   // matches has the round id, the participants and the scores
   pool.query(
     "INSERT INTO competitions (name, system, organizer, organizerName) VALUES ($1, $2, $3, $4) RETURNING competition_id",
-    [name, system, sid, username],
+    [name, system, sub, username],
     (err: any, results: any) => {
       if (err) {
         throw err;
@@ -171,10 +168,10 @@ app.get("/competition/:id", function (req, res) {
   const id = req.params.id;
   let username : string | undefined;
   let matches : any[] = [];
-  let sid : string | undefined;
+  let sub : string | undefined;
   if (req.oidc.isAuthenticated()) {
     username = req.oidc.user?.name ?? req.oidc.user?.sub;
-    sid = req.oidc.user?.sid;
+    sub = req.oidc.user?.sub;
   }
   pool.query(
     "SELECT * FROM competitions NATURAL JOIN rounds NATURAL JOIN matches WHERE competition_id = $1 ORDER BY round_number ASC",
@@ -219,7 +216,7 @@ app.get("/competition/:id", function (req, res) {
       });
       console.log(leaderboard);
       console.log(matches);
-      res.render('competition', {matches, username, leaderboard, sid});
+      res.render('competition', {matches, username, leaderboard, sub});
     }
   );
 }
