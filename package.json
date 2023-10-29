@@ -1,9 +1,7 @@
 {
   "scripts": {
-    "build": "npm run clean && tsc && npm run copy-views && npm run copy-views",
-    "clean": "if exist dist rmdir /s /q dist",
-    "copy-views": "robocopy /mir /NFL /NDL /NJH /NJS /nc /ns /np src/views/ dist/views & exit 0",
-    "start": "set SECRET='stojane jel sapunjaš mačora'&& set CLIENT_ID=5ENtVTrSMIA6Tz0AjIdhKwgPdylBOy0S&& set CLIENT_SECRET=4CDhOb-T5PNgvT8qp-v3CRNIfKmRATv8BBdWJ0pkLvzHBv--1xGMSadFdf2WFS9H&& node src/web2lab1.js"
+    "build": "tsc",
+    "start": "npm run build && node src/web2lab1.js"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
