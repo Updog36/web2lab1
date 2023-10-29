@@ -42,6 +42,7 @@ app.get('/',  function (req, res) {
   let username : string | undefined;
   if (req.oidc.isAuthenticated()) {
     username = req.oidc.user?.name ?? req.oidc.user?.sub;
+    console.log(req.oidc.user)
   }
   res.render('index', {username});
 });
