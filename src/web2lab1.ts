@@ -355,9 +355,6 @@ app.post("/competition/:id/:match", requiresAuth(), function (req, res) {
 );
 
 // create server without key and cert
-https.createServer({
-  key: fs.readFileSync('server.key'),
-  cert: fs.readFileSync('server.cert')
-}, app).listen(port, () => {
-  console.log(`App started on ${process.env.BASE_URL}`)
-})
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+ })
