@@ -4,6 +4,7 @@ html
         title WEB 2: #{matches[0].name}
     body
         h1 #{matches[0].name}
+        h2 Win/Draw/Lose : #{matches[0].system}
         p Created by #{matches[0].organizername}
         if sub == matches[0].organizer
             form(action=`/competition/${matches[0].competition_id}`, method="post")
@@ -26,9 +27,9 @@ html
                 p Round #{match.round_number} : #{match.player1} vs #{match.player2}
                 if match.score1 == null && sub == match.organizer
                     form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
-                        input(type="submit", name="score", value="win")
-                        input(type="submit", name="score", value="draw")
-                        input(type="submit", name="score", value="loss")
+                        button(type="submit", name="score", value="win") #{match.player1} won
+                        button(type="submit", name="score", value="draw") Draw
+                        button(type="submit", name="score", value="loss") #{match.player2} won
                 if match.winner && match.score2
                     if match.score1 > match.score2
                         p #{match.player1} won
