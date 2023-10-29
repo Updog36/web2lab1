@@ -24,21 +24,22 @@ html
         h2 Matches:
         div
             each match in matches
-                p Round #{match.round_number} : #{match.player1} vs #{match.player2}
-                if match.score1 == null && sub == match.organizer
-                    form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
-                        button(type="submit", name="score", value="win") #{match.player1} won
-                        button(type="submit", name="score", value="draw") Draw
-                        button(type="submit", name="score", value="loss") #{match.player2} won
-                if match.winner != null
-                    if match.score1 > match.score2
-                        p #{match.player1} won
-                    else if match.score1 < match.score2
-                        p #{match.player2} won
-                    else
-                        p Draw
-                if match.score1 && sub == match.organizer
-                    form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
-                        input(type="submit", name="delete", value="Delete")
-        br        
+                div(class="matchContainer")
+                    p Round #{match.round_number} : #{match.player1} vs #{match.player2}
+                    if match.score1 == null && sub == match.organizer
+                        form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
+                            button(type="submit", name="score", value="win") #{match.player1} won
+                            button(type="submit", name="score", value="draw") Draw
+                            button(type="submit", name="score", value="loss") #{match.player2} won
+                    if match.winner != null
+                        if match.score1 > match.score2
+                            p #{match.player1} won
+                        else if match.score1 < match.score2
+                            p #{match.player2} won
+                        else
+                            p Draw
+                    if match.score1 && sub == match.organizer
+                        form(action=`/competition/${match.competition_id}/${match.match_id}`, method="post")
+                            input(type="submit", name="delete", value="Delete")
+            br        
         a(href='/competitions', title='Back') Back

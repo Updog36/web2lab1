@@ -48,7 +48,7 @@ a:hover {
   text-decoration: underline;
 }
 
-form:after {
+.matchContainer:after {
   content: "";
   display: block;
   width: 100%;
