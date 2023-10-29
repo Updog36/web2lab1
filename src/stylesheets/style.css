@@ -83,3 +83,12 @@ table:after {
   margin: 10px;
   background-color: #dbdbdb;
 }
+
+button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
