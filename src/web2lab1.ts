@@ -96,12 +96,19 @@ app.post("/new-competition", requiresAuth(), function (req, res) {
   const draw = req.body.draw;
   const loss = req.body.loss;
   const participants = req.body.participants.split(",");
+  // check validity of input
+  if (!name || !win || !draw || !loss || !participants) {
+    alert("Please fill in all fields and try again");
+    return;
+  }
+
   const system = win + "/" + draw + "/" + loss;
   
-  // generate round robin rounds
   if (participants.length < 4 || participants.length > 8) {
-    throw new Error("Invalid number of participants");
+    alert("Please enter between 4 and 8 participants");
+    return;
   }
+  // generate round robin rounds
   const participantsCopy : any[] = Array.from(participants);
   if (participants.length % 2 == 1) {
     participantsCopy.push(null);
